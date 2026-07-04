@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
-import { Expense } from '../types';
+import { Expense, TranslationSet } from '../types';
 
 interface ICCategoryChartProps {
   expenses: Expense[];
-  t: any;
+  t: TranslationSet;
 }
 
 // Professional palette matching the theme

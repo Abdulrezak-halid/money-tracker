@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Expense, Category } from '../types';
+import { Expense, Category, TranslationSet } from '../types';
+import { Language } from '../translations';
 import { v4 as uuidv4 } from 'uuid';
 import { FaChevronDown } from 'react-icons/fa6';
 
 interface CManualFormProps {
   onAdd: (expense: Expense) => void;
-  t: any;
-  language: string;
+  t: TranslationSet;
+  language: Language;
 }
 
 const CManualForm: React.FC<CManualFormProps> = ({ onAdd, t, language }) => {

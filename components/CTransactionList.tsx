@@ -1,12 +1,12 @@
 import React from 'react';
-import { Expense } from '../types';
+import { Expense, TranslationSet } from '../types';
 import { getCategoryIcon } from '../utils/icons';
 import { FaTrashCan } from 'react-icons/fa6';
 
 interface CTransactionListProps {
   expenses: Expense[];
   onDelete: (id: string) => void;
-  t: any;
+  t: TranslationSet;
 }
 
 const CTransactionList: React.FC<CTransactionListProps> = ({ expenses, onDelete, t }) => {
@@ -14,7 +14,7 @@ const CTransactionList: React.FC<CTransactionListProps> = ({ expenses, onDelete,
    * Handles deletion with confirmation
    */
   const handleDelete = (id: string, description: string) => {
-    if (window.confirm(t.confirmDelete || `Delete "${description}"?`)) {
+    if (window.confirm(t.confirmDelete.replace('{description}', description))) {
       onDelete(id);
     }
   };

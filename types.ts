@@ -27,3 +27,34 @@ export interface ParsedExpenseData {
   description: string;
   category: Category;
 }
+
+export interface TranslationSet {
+  appTitle: string;
+  subtitle: string;
+  totalSpent: string;
+  transactionCount: string;
+  smartAdd: string;
+  smartAddDesc: string;
+  placeholderSmart: string;
+  addBtn: string;
+  analyzing: string;
+  manualAdd: string;
+  placeLabel: string;
+  placePlaceholder: string;
+  amountLabel: string;
+  amountPlaceholder: string;
+  categoryLabel: string;
+  saveBtn: string;
+  recentTransactions: string;
+  noTransactions: string;
+  chartTitle: string;
+  errorParsing: string;
+  errorConnection: string;
+  statusTitle: string;
+  statusDesc: string;
+  statusEmpty: string;
+  noDataChart: string;
+  delete: string;
+  confirmDelete: string;
+  categories: Record<Category, string>;
+}

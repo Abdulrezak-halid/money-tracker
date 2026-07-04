@@ -1,8 +1,8 @@
-import { Category } from './types';
+import { Category, TranslationSet } from './types';
 
 export type Language = 'tr' | 'ar';
 
-export const translations = {
+export const translations: Record<Language, TranslationSet> = {
   tr: {
     appTitle: "ParaTakip",
     subtitle: "Akıllı Harcama Yönetimi",
@@ -24,11 +24,13 @@ export const translations = {
     noTransactions: "Henüz işlem yok.",
     chartTitle: "Kategori Dağılımı",
     errorParsing: "Harcama bilgisi çıkarılamadı. Lütfen net bir ifade kullanın.",
+    errorConnection: "Bağlantı hatası oluştu. Lütfen tekrar deneyin.",
     statusTitle: "Harcama Durumu",
     statusDesc: "Harcamalarınız kontrol altında.",
     statusEmpty: "Başlamak için harcama ekleyin.",
     noDataChart: "Grafik için veri yok",
     delete: "Sil",
+    confirmDelete: '"{description}" kaydını silmek istiyor musunuz?',
     categories: {
       [Category.MARKET]: "Market & Alışveriş",
       [Category.ULASIM]: "Ulaşım",
@@ -66,11 +68,13 @@ export const translations = {
     noTransactions: "لا توجد معاملات بعد.",
     chartTitle: "توزيع الفئات",
     errorParsing: "لم يتم استخراج معلومات المصروف. الرجاء المحاولة مرة أخرى.",
+    errorConnection: "حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.",
     statusTitle: "حالة المصروفات",
     statusDesc: "مصروفاتك تحت السيطرة.",
     statusEmpty: "أضف مصروفاً للبدء.",
     noDataChart: "لا توجد بيانات للرسم البياني",
     delete: "حذف",
+    confirmDelete: 'هل تريد حذف "{description}"؟',
     categories: {
       [Category.MARKET]: "سوبر ماركت",
       [Category.ULASIM]: "نقل ومواصلات",

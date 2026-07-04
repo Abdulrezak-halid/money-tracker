@@ -1,11 +1,11 @@
 {
-  "name": "MoneyTracker",
-  "short_name": "MoneyTrack",
-  "description": "Simple personal finance tracker",
+  "name": "ParaTakip",
+  "short_name": "ParaTakip",
+  "description": "AI destekli kisisel harcama takip uygulamasi",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2563EB",
+  "background_color": "#eae0d5",
+  "theme_color": "#5e503f",
   "icons": [
     {
       "src": "/icons/icon-192.svg",

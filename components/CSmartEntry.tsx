@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { parseExpenseFromText } from '../services/geminiService';
-import { Expense } from '../types';
+import { Expense, TranslationSet } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import { FaWandMagicSparkles, FaArrowRight, FaSpinner } from 'react-icons/fa6';
 
 interface CSmartEntryProps {
   onAdd: (expense: Expense) => void;
-  t: any;
+  t: TranslationSet;
 }
 
 const CSmartEntry: React.FC<CSmartEntryProps> = ({ onAdd, t }) => {
@@ -35,10 +35,10 @@ const CSmartEntry: React.FC<CSmartEntryProps> = ({ onAdd, t }) => {
         onAdd(newExpense);
         setText('');
       } else {
-        setError(t.errorParsing || "Unable to parse expense. Please try again or use manual entry.");
+        setError(t.errorParsing);
       }
-    } catch (err) {
-      setError(t.errorConnection || "Connection error. Please try again.");
+    } catch {
+      setError(t.errorConnection);
     } finally {
       setLoading(false);
     }

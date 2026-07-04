@@ -1,15 +1,10 @@
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
+import { Expense } from '../types';
 
 interface MoneyDB extends DBSchema {
   transactions: {
     key: string;
-    value: {
-      id: string;
-      amount: number;
-      category: string;
-      note?: string;
-      date: string;
-    };
+    value: Expense;
     indexes: { 'by-date': string };
   };
 }
@@ -35,10 +30,17 @@ export async function saveTransaction(tx: MoneyDB['transactions']['value']) {
 
 export async function getAllTransactions() {
   const db = await getDB();
-  return await db.getAll('transactions');
+  return db.getAll('transactions');
 }
 
-export async function clearTransactions() {
+export async function replaceTransactions(transactions: Expense[]) {
   const db = await getDB();
-  await db.clear('transactions');
+  const tx = db.transaction('transactions', 'readwrite');
+  await tx.store.clear();
+
+  for (const transaction of transactions) {
+    await tx.store.put(transaction);
+  }
+
+  await tx.done;
 }

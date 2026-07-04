@@ -8,12 +8,26 @@ import CCategoryChart from "./components/CCategoryChart";
 import CManualForm from "./components/CManualForm";
 import CSmartEntry from "./components/CSmartEntry";
 import CStatsCard from "./components/CStatsCard";
+import { getAllTransactions, replaceTransactions } from "./services/storage";
+
+const LEGACY_EXPENSES_KEY = "expenses";
+
+const parseStoredExpenses = (raw: string | null): Expense[] => {
+  if (!raw) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
 
 function App() {
-  const [expenses, setExpenses] = useState<Expense[]>(() => {
-    const saved = localStorage.getItem("expenses");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [isExpensesReady, setIsExpensesReady] = useState(false);
 
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem("theme");
@@ -26,8 +40,53 @@ function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
+    const loadExpenses = async () => {
+      try {
+        const savedExpenses = await getAllTransactions();
+
+        if (savedExpenses.length > 0) {
+          setExpenses(savedExpenses);
+          setIsExpensesReady(true);
+          return;
+        }
+
+        const legacyExpenses = parseStoredExpenses(
+          localStorage.getItem(LEGACY_EXPENSES_KEY)
+        );
+
+        if (legacyExpenses.length > 0) {
+          setExpenses(legacyExpenses);
+          await replaceTransactions(legacyExpenses);
+          localStorage.removeItem(LEGACY_EXPENSES_KEY);
+        }
+      } catch (error) {
+        console.error("Failed to load IndexedDB expenses:", error);
+        setExpenses(parseStoredExpenses(localStorage.getItem(LEGACY_EXPENSES_KEY)));
+      }
+
+      setIsExpensesReady(true);
+    };
+
+    void loadExpenses();
+  }, []);
+
+  useEffect(() => {
+    if (!isExpensesReady) {
+      return;
+    }
+
+    const persistExpenses = async () => {
+      try {
+        await replaceTransactions(expenses);
+        localStorage.removeItem(LEGACY_EXPENSES_KEY);
+      } catch (error) {
+        console.error("Failed to persist IndexedDB expenses:", error);
+        localStorage.setItem(LEGACY_EXPENSES_KEY, JSON.stringify(expenses));
+      }
+    };
+
+    void persistExpenses();
+  }, [expenses, isExpensesReady]);
 
   useEffect(() => {
     localStorage.setItem("theme", darkMode ? "dark" : "light");
