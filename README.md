@@ -4,7 +4,7 @@ ParaTakip is a modern, responsive personal finance application tailored for Turk
 
 ## Getting Started
 
-## 🌟 Features
+## Features
 
 - **AI Smart Entry**: Paste a text like _"A101'den 250 liraya alışveriş yaptım"_ and let Gemini extract the amount, category, and description automatically.
 - **Bilingual Support**: Fully localized for Turkish (TR) and Arabic (AR) with RTL layout support.
@@ -13,7 +13,7 @@ ParaTakip is a modern, responsive personal finance application tailored for Turk
 - **Responsive Design**: Mobile-first architecture ensures a great experience on phones and desktops.
 - **Privacy Focused**: Data is stored locally on your device in the browser (`IndexedDB`).
 
-## 🎨 Color Palette
+## Color Palette
 
 The application uses a sophisticated color scheme designed for readability and aesthetics:
 
@@ -23,7 +23,7 @@ The application uses a sophisticated color scheme designed for readability and a
 - **Accent**: `#c6ac8f` (Khaki)
 - **Primary Action**: `#5e503f` (Walnut)
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **React 19**: Frontend framework.
 - **Tailwind CSS**: Utility-first styling.
@@ -32,7 +32,7 @@ The application uses a sophisticated color scheme designed for readability and a
 - **React Icons**: Iconography.
 - **TypeScript**: Type safety.
 
-## 🚀 Getting Started
+## Getting Started
 
 > > > > > > > 372dca8 (fix: type/react errors)
 
